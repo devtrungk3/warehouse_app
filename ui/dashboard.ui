@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1130</width>
+    <height>690</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit {
+	border-radius: 5px;
+	border: 1px solid #000000;
+	padding: 10px;
+}
+QComboBox {
+	border-radius: 5px;
+	border: 1px solid #000000;
+	padding: 10px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1131</width>
+      <height>691</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="dashboard_tab">
+     <attribute name="title">
+      <string>Tổng quan kho</string>
+     </attribute>
+     <widget class="QFrame" name="container1">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>531</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="container2">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>10</y>
+        <width>531</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="container3">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>329</y>
+        <width>711</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="container4">
+      <property name="geometry">
+       <rect>
+        <x>19</x>
+        <y>329</y>
+        <width>361</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Kho</string>
+     </attribute>
+     <widget class="QTableWidget" name="inven_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>1061</width>
+        <height>351</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID hàng hóa</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên hàng hóa</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Số lượng</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày thay đổi</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="category_tab">
+     <attribute name="title">
+      <string>Danh mục</string>
+     </attribute>
+     <widget class="QTableWidget" name="cate_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>79</y>
+        <width>871</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên danh mục</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày tạo</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="add_cate_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>79</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Thêm mới</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="update_cate_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>139</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Sửa đổi</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="delete_cate_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>199</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Xóa</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="search_cate_input">
+      <property name="geometry">
+       <rect>
+        <x>42</x>
+        <y>20</y>
+        <width>451</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="placeholderText">
+       <string>Tìm kiếm</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="search_cate_btn">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>20</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Tìm kiếm</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="product_tab">
+     <attribute name="title">
+      <string>Hàng hóa</string>
+     </attribute>
+     <widget class="QLineEdit" name="search_prod_input">
+      <property name="geometry">
+       <rect>
+        <x>42</x>
+        <y>21</y>
+        <width>451</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="placeholderText">
+       <string>Tìm kiếm</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="delete_prod_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>200</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Xóa</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="prod_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>871</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên hàng hóa</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Loại</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Đơn vị</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày tạo</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="add_prod_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>80</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Thêm mới</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="update_prod_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>140</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Sửa đổi</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="search_prod_btn">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>21</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Tìm kiếm</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Đối tác</string>
+     </attribute>
+     <widget class="QPushButton" name="delete_prtn_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>140</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Xóa</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="prtn_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>871</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Mô tả</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="add_prtn_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>20</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Thêm mới</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="update_prtn_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>80</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Sửa đổi</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="import_tab">
+     <attribute name="title">
+      <string>Phiếu nhập kho</string>
+     </attribute>
+     <widget class="QTableWidget" name="import_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>1041</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên đối tác</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Trạng thái</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nhân viên</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày tạo</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="im_order_item_btn">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>300</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Chi tiết</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="process_im_btn">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>300</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Xử lý</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="filter_im_status_box">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>300</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="editable">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="export_tab">
+     <attribute name="title">
+      <string>Phiếu xuất kho</string>
+     </attribute>
+     <widget class="QPushButton" name="process_ex_btn">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>300</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Xử lý</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="export_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>1041</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên đối tác</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Trạng thái</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nhân viên</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày tạo</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QComboBox" name="filter_ex_status_box">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>300</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="editable">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ex_order_item_btn">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>300</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Chi tiết</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="account_tab">
+     <attribute name="title">
+      <string>Tài khoản</string>
+     </attribute>
+     <widget class="QPushButton" name="update_acc_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>80</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Sửa đổi</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="add_acc_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>20</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Thêm mới</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="acc_table">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>871</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tên đăng nhập</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Họ tên</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quyền</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày tạo</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="delete_acc_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>140</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Xóa</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="logout_btn">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>590</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background: #b5de83;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	font-size: 16px
+}</string>
+      </property>
+      <property name="text">
+       <string>Đăng xuất</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
