@@ -82,7 +82,7 @@ class StaffHomeWindow(QMainWindow):
             products = {}
             for row in data:
                 products[row[0]] = (row[1], row[2], row[3])
-            dialog = AddProdToOrder(products)
+            dialog = AddProdToOrder(products, self.type_box.currentData())
             if dialog.exec_()  == QDialog.Accepted:
                 row_position = self.prod_table.rowCount()
                 self.prod_table.insertRow(row_position)
@@ -215,7 +215,7 @@ class StaffHomeWindow(QMainWindow):
 
     """
     def load_import_order_data(self):
-        data = self.__conn.data_query("SELECT [order].id, partner.name, status, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 0", (self.__userdata.id,))
+        data = self.__conn.data_query("SELECT [order].id, partner.name, status, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 0 ORDER BY order_date DESC", (self.__userdata.id,))
         
         if data:
             self.import_table.setRowCount(len(data))  
@@ -265,7 +265,7 @@ class StaffHomeWindow(QMainWindow):
 
     """
     def load_export_order_data(self):
-        data = self.__conn.data_query("SELECT [order].id, partner.name, status, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 1", (self.__userdata.id,))
+        data = self.__conn.data_query("SELECT [order].id, partner.name, status, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 1 ORDER BY order_date DESC", (self.__userdata.id,))
         
         if data:
             self.export_table.setRowCount(len(data))  

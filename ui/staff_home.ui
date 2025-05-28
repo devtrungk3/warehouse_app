@@ -36,7 +36,7 @@ QComboBox {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -155,7 +155,7 @@ QComboBox {
 }</string>
       </property>
       <property name="text">
-       <string>Yêu cầu nhập kho</string>
+       <string>Yêu cầu duyệt</string>
       </property>
      </widget>
      <widget class="QPushButton" name="delete_all_prod_btn">
@@ -377,11 +377,6 @@ QComboBox {
       </column>
       <column>
        <property name="text">
-        <string>Loại</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
         <string>Trạng thái</string>
        </property>
       </column>
@@ -475,11 +470,6 @@ QComboBox {
       <column>
        <property name="text">
         <string>Tên đối tác</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Loại</string>
        </property>
       </column>
       <column>

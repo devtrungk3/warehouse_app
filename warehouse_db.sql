@@ -57,14 +57,3 @@ create table order_item (
 	unit nvarchar(10) not null,
 	quantity int not null
 )
-
-insert into role values (N'quản trị viên', N'Nhân viên')
-insert into account (username, fullname, password, role_id) values ('admin', 'admin', '1234', 1)
-
-SELECT 
-    MONTH(order_date) AS month_number,
-    COUNT(id)
-FROM [order]
-WHERE type = 0 -- 1 = export
-    AND YEAR(order_date) = YEAR(GETDATE()) -- current year
-GROUP BY MONTH(order_date), DATENAME(MONTH, order_date)

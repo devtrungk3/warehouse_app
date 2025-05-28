@@ -2,11 +2,12 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5 import uic
 import re
 class AddProdToOrder(QDialog):
-    def __init__(self, products):
+    def __init__(self, products, type):
         super().__init__()
         uic.loadUi("ui/add_prod_to_order.ui", self)
         self.setWindowTitle("Nhập kho")
         self.__products = products
+        self.__type = type
         for id, value in products.items():
             self.prod_box.addItem(value[0], id)
         self.unit_input.setText(self.__products[self.prod_box.currentData()][1])
@@ -16,7 +17,8 @@ class AddProdToOrder(QDialog):
         
     def validate_quantity(self):
         quantity = self.quantity_input.text().strip()
-        if re.fullmatch(r"0*[1-9]\d*", quantity) and int(quantity) <= self.__products[self.prod_box.currentData()][2]:
+        check_inventory = quantity and (self.__type == 1 and int(quantity) <= self.__products[self.prod_box.currentData()][2]) or self.__type == 0
+        if quantity and re.fullmatch(r"0*[1-9]\d*", quantity) and check_inventory:
             self.btn_box.setEnabled(True)
         else:
             self.btn_box.setEnabled(False)

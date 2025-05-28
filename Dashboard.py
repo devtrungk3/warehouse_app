@@ -46,15 +46,15 @@ class DashboardWindow(QMainWindow):
         self.process_im_btn.clicked.connect(self.process_import_order)
         self.filter_im_status_box.addItem("Tất cả", -1)
         self.filter_im_status_box.addItem("Đồng ý", 0)
-        self.filter_im_status_box.addItem("Đang chờ", 1)
+        self.filter_im_status_box.addItem("Chờ duyệt", 1)
         self.filter_im_status_box.addItem("Hủy bỏ", 2)
         self.filter_im_status_box.currentIndexChanged.connect(self.load_import_order_data)
 
-        self.ex_order_item_btn.clicked.connect(self.show_import_order_item)
-        self.process_ex_btn.clicked.connect(self.process_import_order)
+        self.ex_order_item_btn.clicked.connect(self.show_export_order_item)
+        self.process_ex_btn.clicked.connect(self.process_export_order)
         self.filter_ex_status_box.addItem("Tất cả", -1)
         self.filter_ex_status_box.addItem("Đồng ý", 0)
-        self.filter_ex_status_box.addItem("Đang chờ", 1)
+        self.filter_ex_status_box.addItem("Chờ duyệt", 1)
         self.filter_ex_status_box.addItem("Hủy bỏ", 2)
         self.filter_ex_status_box.currentIndexChanged.connect(self.load_export_order_data)
         
@@ -105,8 +105,8 @@ class DashboardWindow(QMainWindow):
         
         data1 = self.__conn.data_query("SELECT TOP 3 product.name, quantity FROM inventory JOIN product ON product.id = inventory.product_id ORDER BY quantity DESC")
         data2 = self.__conn.data_query("SELECT TOP 3 product.name, quantity FROM inventory JOIN product ON product.id = inventory.product_id ORDER BY quantity ASC")
-        data3 = self.__conn.data_query("SELECT MONTH(order_date), COUNT(id) FROM [order] WHERE type = 0 AND YEAR(order_date) = YEAR(GETDATE()) GROUP BY MONTH(order_date)")
-        data4 = self.__conn.data_query("SELECT category.name, count(product.id) FROM product JOIN category ON category.id = product.category_id GROUP BY product.id, category.name")
+        data3 = self.__conn.data_query("SELECT MONTH(order_date), COUNT(id) FROM [order] WHERE type = 1 AND YEAR(order_date) = YEAR(GETDATE()) GROUP BY MONTH(order_date)")
+        data4 = self.__conn.data_query("SELECT category.name, count(product.id) FROM product JOIN category ON category.id = product.category_id GROUP BY category.name")
         
         if data1:
             self.chart_highest_quantity_prod(data1)
@@ -190,7 +190,7 @@ class DashboardWindow(QMainWindow):
         ax = fig.add_subplot(111)
 
         ax.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
-        ax.set_title("Fruit Distribution")
+        ax.set_title("Mức phân tán danh mục")
         ax.axis('equal') 
 
         canvas = FigureCanvas(fig)
@@ -213,6 +213,10 @@ class DashboardWindow(QMainWindow):
     
     
     
+    
+    
+    
+    
     """
     
         Inventory tab
@@ -227,6 +231,9 @@ class DashboardWindow(QMainWindow):
                 self.inven_table.setItem(index, 1, QTableWidgetItem(row[1]))
                 self.inven_table.setItem(index, 2, QTableWidgetItem(str(row[2])))
                 self.inven_table.setItem(index, 3, QTableWidgetItem(str(row[3].strftime("%Y-%m-%d %H:%M:%S"))))
+    
+    
+    
     
     
     
@@ -545,8 +552,8 @@ class DashboardWindow(QMainWindow):
         if selected:
             row  = selected.row()
             id = self.import_table.item(row, 0).text()
-            status = self.import_table.item(row, 3).text()
-            if status == "Đang chờ":
+            status = self.import_table.item(row, 2).text()
+            if status == "Chờ duyệt":
                 dialog = ProcessOrderDialog()
                 if dialog.exec_() and QDialog.Accepted:
                     data = self.__conn.data_query("SELECT product_id, quantity FROM order_item WHERE order_id = ?", (id, ))
@@ -555,7 +562,7 @@ class DashboardWindow(QMainWindow):
                         params = [(dialog.status(), id)]
                         if dialog.status() == 0:
                             for row in data:
-                                queries.append("UPDATE inventory SET quantity = quantity + ? WHERE product_id = ?")
+                                queries.append("UPDATE inventory SET quantity = quantity + ?, updated_at = GETDATE() WHERE product_id = ?")
                                 params.append((row[1], row[0]))
                         if self.__conn.multi_data_manipulation(queries, params):
                             QMessageBox.information(self, "Thành công", "Cập nhật thành công")
@@ -623,8 +630,8 @@ class DashboardWindow(QMainWindow):
         if selected:
             row  = selected.row()
             id = self.export_table.item(row, 0).text()
-            status = self.export_table.item(row, 3).text()
-            if status == "Đang chờ":
+            status = self.export_table.item(row, 2).text()
+            if status == "Chờ duyệt":
                 dialog = ProcessOrderDialog()
                 if dialog.exec_() and QDialog.Accepted:
                     data = self.__conn.data_query("SELECT product_id, quantity from order_item WHERE order_id = ?", (id, ))
@@ -633,7 +640,7 @@ class DashboardWindow(QMainWindow):
                         params = [(dialog.status(), id)]
                         if dialog.status() == 0:
                             for row in data:
-                                queries.append("UPDATE inventory SET quantity = quantity - ? WHERE product_id = ?")
+                                queries.append("UPDATE inventory SET quantity = quantity - ?, updated_at = GETDATE() WHERE product_id = ?")
                                 params.append((row[1], row[0]))
                         if self.__conn.multi_data_manipulation(queries, params):
                             QMessageBox.information(self, "Thành công", "Cập nhật thành công")
