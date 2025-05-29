@@ -1,12 +1,11 @@
 import pyodbc
+import pyodbc
 
 class Connector:
-    def __init__(self, database, uid, pwd, driver='{ODBC Driver 17 for SQL Server}', server='localhost\SQLEXPRESS'):
+    def __init__(self, database, driver='{ODBC Driver 17 for SQL Server}', server='localhost\SQLEXPRESS'):
         self.__driver = driver
         self.__server = server
         self.__database = database
-        self.__uid = uid
-        self.__pwd = pwd
         
     def connect(self):
         try:
@@ -14,8 +13,7 @@ class Connector:
                 f"DRIVER={self.__driver};"
                 f"SERVER={self.__server};"
                 f"DATABASE={self.__database};"
-                f"UID={self.__uid};"
-                f"PWD={self.__pwd}"
+                "Trusted_Connection=yes;"
             )
             self.__cursor = self.__conn.cursor()
             return True

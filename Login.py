@@ -10,7 +10,7 @@ class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("ui/login.ui", self)
-        self.__conn = Connector('WAREHOUSE', 'devtrung', '1234')
+        self.__conn = Connector('WAREHOUSE')
         self.__conn.connect()
         self.login_button.clicked.connect(self.check_credentials)
         self.setWindowTitle("Quản lý kho")

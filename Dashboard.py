@@ -22,7 +22,7 @@ class DashboardWindow(QMainWindow):
         self.__parent = parent
         uic.loadUi("ui/dashboard.ui", self)
         self.setWindowTitle(f"Quản trị {userdata.username}")
-        self.__conn = Connector('WAREHOUSE', 'devtrung', '1234')
+        self.__conn = Connector('WAREHOUSE')
         self.__conn.connect()
         self.tabWidget.setCurrentIndex(0)
         self.tabWidget.currentChanged.connect(self.on_tab_changed)
