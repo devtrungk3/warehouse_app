@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>484</width>
-    <height>254</height>
+    <height>320</height>
    </rect>
   </property>
   <property name="font">
@@ -35,7 +35,7 @@ QComboBox {
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>200</y>
+     <y>270</y>
      <width>191</width>
      <height>32</height>
     </rect>
@@ -123,7 +123,7 @@ QComboBox {
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>140</y>
+     <y>200</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -139,7 +139,35 @@ QComboBox {
   </widget>
   <widget class="QLineEdit" name="unit_input">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>200</y>
+     <width>331</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>JetBrains Mono</family>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="unit_cost_input">
+   <property name="enabled">
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -160,6 +188,24 @@ QComboBox {
    </property>
    <property name="placeholderText">
     <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Đơn giá</string>
    </property>
   </widget>
  </widget>

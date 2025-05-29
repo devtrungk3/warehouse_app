@@ -1,8 +1,9 @@
 class Product:
-    def __init__(self, id, name, unit=None, category_id=None, category_name=None, created_at=None):
+    def __init__(self, id, name, unit=None, export_cost=None, category_id=None, category_name=None, created_at=None):
         self.__id = id
         self.__name = name
         self.__unit = unit
+        self.__export_cost = export_cost
         self.__category_id = category_id
         self.__category_name = category_name
         self.__created_at = created_at
@@ -18,6 +19,10 @@ class Product:
     @property
     def unit(self):
         return self.__unit
+    
+    @property
+    def export_cost(self):
+        return self.__export_cost
 
     @property
     def category_id(self):
@@ -43,6 +48,9 @@ class Product:
     def unit(self, unit):
         self.__unit = unit
 
+    @export_cost.setter
+    def export_cost(self, export_cost):
+        self.__export_cost = export_cost
 
     @category_id.setter
     def category_id(self, category_id):

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>494</width>
-    <height>248</height>
+    <height>312</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@ QComboBox {
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>200</y>
+     <y>250</y>
      <width>201</width>
      <height>31</height>
     </rect>
@@ -81,7 +81,7 @@ QComboBox {
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>130</y>
+     <y>190</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -99,7 +99,7 @@ QComboBox {
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>130</y>
+     <y>190</y>
      <width>331</width>
      <height>41</height>
     </rect>
@@ -147,6 +147,42 @@ QComboBox {
    </property>
    <property name="text">
     <string>Đơn vị</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="ex_cost_input">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>130</y>
+     <width>331</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Giá xuất</string>
    </property>
   </widget>
  </widget>

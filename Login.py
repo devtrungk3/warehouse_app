@@ -13,6 +13,7 @@ class LoginWindow(QMainWindow):
         self.__conn = Connector('WAREHOUSE', 'devtrung', '1234')
         self.__conn.connect()
         self.login_button.clicked.connect(self.check_credentials)
+        self.setWindowTitle("Quản lý kho")
 
     def check_credentials(self):
         username = self.username_input.text().strip()

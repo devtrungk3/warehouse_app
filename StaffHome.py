@@ -24,6 +24,7 @@ class StaffHomeWindow(QMainWindow):
         self.type_box.addItem("Nhập kho", 0)
         self.type_box.addItem("Xuất kho", 1)
         
+        self.total_cost.setText("0")
         self.add_prod_btn.clicked.connect(self.show_add_product_dialog)
         self.delete_prod_btn.clicked.connect(self.delete_product)
         self.delete_all_prod_btn.clicked.connect(self.clear_product)
@@ -77,11 +78,11 @@ class StaffHomeWindow(QMainWindow):
     
     
     def show_add_product_dialog(self):
-        data = self.__conn.data_query("SELECT product.id, name, unit, quantity FROM product JOIN inventory ON inventory.product_id = product.id")
+        data = self.__conn.data_query("SELECT product.id, name, unit, quantity, export_cost FROM product JOIN inventory ON inventory.product_id = product.id")
         if data:
             products = {}
             for row in data:
-                products[row[0]] = (row[1], row[2], row[3])
+                products[row[0]] = (row[1], row[2], row[3], row[4])
             dialog = AddProdToOrder(products, self.type_box.currentData())
             if dialog.exec_()  == QDialog.Accepted:
                 row_position = self.prod_table.rowCount()
@@ -89,11 +90,15 @@ class StaffHomeWindow(QMainWindow):
                 self.prod_table.setItem(row_position, 0, QTableWidgetItem(str(dialog.product_id())))
                 self.prod_table.setItem(row_position, 1, QTableWidgetItem(dialog.product_name()))
                 self.prod_table.setItem(row_position, 2, QTableWidgetItem(dialog.quantity()))
-                self.prod_table.setItem(row_position, 3, QTableWidgetItem(dialog.unit()))
+                self.prod_table.setItem(row_position, 3, QTableWidgetItem(dialog.unit_cost()))
+                self.prod_table.setItem(row_position, 4, QTableWidgetItem(dialog.unit()))
+                
+                self.total_cost.setText(str(int(self.total_cost.text()) + int(dialog.unit_cost()) * int(dialog.quantity())))
         
     def delete_product(self):
         selected_row = self.prod_table.currentRow()
-        if selected_row >= 0:
+        if selected_row >= 0 and self.prod_table.item(selected_row, 3):
+            self.total_cost.setText(str(int(self.total_cost.text()) - int(self.prod_table.item(selected_row, 2).text()) * int(self.prod_table.item(selected_row, 3).text())))
             self.prod_table.removeRow(selected_row)
             
     def clear_product(self):
@@ -107,6 +112,7 @@ class StaffHomeWindow(QMainWindow):
         if reply == QMessageBox.Yes:
             self.prod_table.clearContents()
             self.prod_table.setRowCount(0)
+            self.total_cost.setText("0")
             
     def submit_product_table(self):
         if (self.prod_table.rowCount() != 0):
@@ -114,17 +120,17 @@ class StaffHomeWindow(QMainWindow):
             if reply == QMessageBox.Yes:
                 rows = self.prod_table.rowCount()
                 cols = self.prod_table.columnCount()
-                queries = ["INSERT INTO [order] (partner_id, type, status, staff_id) OUTPUT INSERTED.id VALUES (?,?,?,?)"]
-                params = [(self.prtn_box.currentData(), self.type_box.currentData(), 1, self.__userdata.id)]
+                queries = ["INSERT INTO [order] (partner_id, type, total_cost, status, staff_id) OUTPUT INSERTED.id VALUES (?,?,?,?,?)"]
+                params = [(self.prtn_box.currentData(), self.type_box.currentData(), self.total_cost.text(), 1, self.__userdata.id)]
                 
-                queries.append("INSERT INTO order_item (product_id, quantity, unit, order_id) VALUES (?,?,?,?)")
+                queries.append("INSERT INTO order_item (product_id, quantity, unit_cost, unit, order_id) VALUES (?,?,?,?,?)")
                 for row in range(rows):
                     row_data = []
                     for col in range(cols):
                         item = self.prod_table.item(row, col)
                         if item is not None:
                             row_data.append(item.text())
-                    params.append([row_data[0], row_data[2], row_data[3]])
+                    params.append([row_data[0], row_data[2], row_data[3], row_data[4]])
                 if self.__conn.manipulate_get_manipulate(queries, params):
                     QMessageBox.information(self, "Thành công", "Yêu cầu thành công")
                     self.prod_table.clearContents()
@@ -215,7 +221,7 @@ class StaffHomeWindow(QMainWindow):
 
     """
     def load_import_order_data(self):
-        data = self.__conn.data_query("SELECT [order].id, partner.name, status, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 0 ORDER BY order_date DESC", (self.__userdata.id,))
+        data = self.__conn.data_query("SELECT [order].id, partner.name, status, total_cost, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 0 ORDER BY order_date DESC", (self.__userdata.id,))
         
         if data:
             self.import_table.setRowCount(len(data))  
@@ -229,8 +235,9 @@ class StaffHomeWindow(QMainWindow):
                     self.import_table.setItem(index, 2, QTableWidgetItem("Chờ duyệt"))
                 else:
                     self.import_table.setItem(index, 2, QTableWidgetItem("Hủy bỏ"))
-                    
-                self.import_table.setItem(index, 3, QTableWidgetItem(str(row[3].strftime("%Y-%m-%d %H:%M:%S"))))
+                
+                self.import_table.setItem(index, 3, QTableWidgetItem(str(row[3])))
+                self.import_table.setItem(index, 4, QTableWidgetItem(str(row[4].strftime("%Y-%m-%d %H:%M:%S"))))
         else:
             self.import_table.clearContents()
             self.import_table.setRowCount(0)
@@ -240,7 +247,7 @@ class StaffHomeWindow(QMainWindow):
         if selected:
             row  = selected.row()
             id = self.import_table.item(row, 0).text()
-            data = self.__conn.data_query("SELECT product_id, product.name, quantity, order_item.unit FROM order_item JOIN product ON product.id = order_item.product_id WHERE order_id = ?", (id,))
+            data = self.__conn.data_query("SELECT product_id, product.name, quantity, unit_cost, order_item.unit FROM order_item JOIN product ON product.id = order_item.product_id WHERE order_id = ?", (id,))
             if data:
                 dialog = OrderItemDialog(data)
                 dialog.exec_()
@@ -265,7 +272,7 @@ class StaffHomeWindow(QMainWindow):
 
     """
     def load_export_order_data(self):
-        data = self.__conn.data_query("SELECT [order].id, partner.name, status, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 1 ORDER BY order_date DESC", (self.__userdata.id,))
+        data = self.__conn.data_query("SELECT [order].id, partner.name, status, total_cost, order_date FROM [order] JOIN partner ON partner.id = [order].partner_id WHERE staff_id = ? AND type = 1 ORDER BY order_date DESC", (self.__userdata.id,))
         
         if data:
             self.export_table.setRowCount(len(data))  
@@ -280,7 +287,8 @@ class StaffHomeWindow(QMainWindow):
                 else:
                     self.export_table.setItem(index, 2, QTableWidgetItem("Hủy bỏ"))
                     
-                self.export_table.setItem(index, 3, QTableWidgetItem(str(row[3].strftime("%Y-%m-%d %H:%M:%S"))))
+                self.export_table.setItem(index, 3, QTableWidgetItem(str(row[3])))
+                self.export_table.setItem(index, 4, QTableWidgetItem(str(row[4].strftime("%Y-%m-%d %H:%M:%S"))))
         else:
             self.export_table.clearContents()
             self.export_table.setRowCount(0)
@@ -290,7 +298,7 @@ class StaffHomeWindow(QMainWindow):
         if selected:
             row  = selected.row()
             id = self.export_table.item(row, 0).text()
-            data = self.__conn.data_query("SELECT product_id, product.name, quantity, order_item.unit FROM order_item JOIN product ON product.id = order_item.product_id WHERE order_id = ?", (id,))
+            data = self.__conn.data_query("SELECT product_id, product.name, quantity, unit_cost, order_item.unit FROM order_item JOIN product ON product.id = order_item.product_id WHERE order_id = ?", (id,))
             if data:
                 dialog = OrderItemDialog(data)
                 dialog.exec_()

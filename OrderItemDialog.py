@@ -12,3 +12,4 @@ class OrderItemDialog(QDialog):
             self.prod_table.setItem(index, 1, QTableWidgetItem(str(row[1])))
             self.prod_table.setItem(index, 2, QTableWidgetItem(str(row[2])))
             self.prod_table.setItem(index, 3, QTableWidgetItem(str(row[3])))
+            self.prod_table.setItem(index, 4, QTableWidgetItem(str(row[4])))

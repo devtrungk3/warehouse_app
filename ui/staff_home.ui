@@ -91,6 +91,11 @@ QComboBox {
       </column>
       <column>
        <property name="text">
+        <string>Đơn giá</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Đơn vị</string>
        </property>
       </column>
@@ -221,6 +226,48 @@ QComboBox {
       </property>
       <property name="frame">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>340</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tổng</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="total_cost">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>340</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="placeholderText">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -382,6 +429,11 @@ QComboBox {
       </column>
       <column>
        <property name="text">
+        <string>Tổng giá</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Ngày tạo</string>
        </property>
       </column>
@@ -479,6 +531,11 @@ QComboBox {
       </column>
       <column>
        <property name="text">
+        <string>Tổng giá</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Ngày tạo</string>
        </property>
       </column>
@@ -508,7 +565,7 @@ QComboBox {
      </widget>
      <widget class="QLineEdit" name="username_input">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -522,6 +579,9 @@ QComboBox {
        <font>
         <pointsize>9</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
       <property name="placeholderText">
        <string/>
@@ -547,7 +607,7 @@ QComboBox {
      </widget>
      <widget class="QLineEdit" name="fullname_input">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -561,6 +621,9 @@ QComboBox {
        <font>
         <pointsize>9</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
       <property name="placeholderText">
        <string/>
